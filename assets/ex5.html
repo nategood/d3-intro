@@ -1,0 +1,57 @@
+<html>
+    <head>
+        <title>D3 Example 4: Transitions</title>
+        <script type="text/javascript" src="d3.js"></script>
+        <script type="text/javascript" src="underscore.js"></script>
+        <script type="text/javascript" src="chart.js"></script>
+        <script type="text/javascript" src="socket.io.js"></script>
+        <style type="text/css">
+            html, body {
+                background: #111;
+                color: #fff;
+                margin: 0;
+                padding: 25px;
+                font-family: Helvetica;
+            }
+            h1 {
+                font-weight: normal;
+                font-size: 23px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Chart Transitions!</h1>
+        <svg id="container" style="display: block; margin: auto"></svg>
+
+        <script type="text/javascript">
+
+            // Instantiate the chart with config
+            var chart1 = chart({
+                height: 400,
+                width: 400,
+                padding: 1,
+                container: "#container"
+            });
+
+            // Connect to Socket
+            (function() {
+                var socket, votes;
+
+                votes = _(5).times(function() {
+                    return 0;
+                });
+
+                socket = io.connect('http://localhost:9999');
+                socket.on('result', function (data) {
+                    var vote = parseInt(data);
+                    if (isNaN(vote) || vote >= votes.length)
+                        return;
+                    votes[vote]++;
+                    chart1(votes);
+                });
+            })();
+
+        </script>
+    </body>
+</html>

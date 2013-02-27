@@ -1,0 +1,49 @@
+<html>
+    <head>
+        <title>D3 Example 4: Transitions</title>
+        <script type="text/javascript" src="d3.js"></script>
+        <script type="text/javascript" src="underscore.js"></script>
+        <script type="text/javascript" src="chart.js"></script>
+        <style type="text/css">
+            html, body {
+                background: #111;
+                color: #fff;
+                margin: 0;
+                padding: 25px;
+                font-family: Helvetica;
+            }
+            h1 {
+                font-weight: normal;
+                font-size: 23px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Chart Transitions!</h1>
+        <svg id="container" style="display: block; margin: auto"></svg>
+
+        <script type="text/javascript">
+            // Generate a random set of data for demo purposes
+            var d = function(n) {
+                return d3.range(n).map(Math.random);
+            };
+
+            // Instantiate the chart with config
+            var chart1 = chart({
+                height: 400,
+                width: 400,
+                padding: 1,
+                container: "#container"
+            });
+
+            // Pass it a new data set and redraw the chart
+            // every 2 seconds to see transition animations.
+            setInterval(function() {
+                var barCount = 20 * Math.random() + 5;
+                chart1(d(barCount));
+            }, 2000);
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,46 @@
+<html style="margin: 0; padding: 0;">
+    <head>
+        <title>D3 Example 1: Selection and Manipulating DOM</title>
+        <script type="text/javascript" src="d3.js"></script>
+        <style type="text/css">
+            a.bucket {
+                display: block;
+                text-decoration: none;
+                padding: 5px;
+                font: 24px Helvetica;
+            }
+        </style>
+    </head>
+    <body style="margin: 0; padding: 0;">
+
+        <div id="container">
+            <a class="bucket">1</a>
+            <a class="bucket">2</a>
+            <a class="bucket">3</a>
+            <a class="bucket">4</a>
+        </div>
+
+        <script type="text/javascript">
+            // Bind to data!
+            var buckets =
+                d3.select("#container")
+                .selectAll("a")
+                .data([12, 23, 16, 32, 64]);
+
+            // buckets.enter().append("a").attr("class", "bucket");
+            // buckets.exit().remove();
+
+            buckets
+                .style("font-size", function(d, i) {
+                    return 3 * d + "px";
+                })
+                .text(function(d, i) {
+                    return "Link " + d;
+                });
+
+            // interesting note.  if you are going to append,
+            // you must have also selected the parent element
+            // at some point (e.g. #container in this case)
+        </script>
+    </body>
+</html>

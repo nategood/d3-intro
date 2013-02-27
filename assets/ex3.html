@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <title>D3 Example 3: SVG in the Mix</title>
+        <script type="text/javascript" src="d3.js"></script>
+        <style type="text/css">
+            html, body {
+                background: #eee;
+                margin: 0;
+                padding: 0;
+                font-family: Helvetica;
+            }
+            h1 {
+                font-weight: normal;
+                font-size: 23px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+
+        <h1>Ahoy! A Bar Chart!</h1>
+        <svg id="container" style="display: block; margin: auto"></svg>
+
+        <script type="text/javascript">
+
+            var width = 800, height = 400, pad = 20;
+
+            var data = [34,55,130,105,60];
+            var barWidth = width / data.length;
+            var max = d3.max(data);
+
+            // Scales! Handy function so that we don't have to
+            // do the math to size our graphics appropriately
+            var yscale = d3.scale.linear()
+                .domain([0, max])
+                .range([0, height]);
+
+            // Size our svg container and bind the data to selection
+            var svg = d3.select("svg#container")
+                .attr("width", width + "px")
+                .attr("height", height + "px");
+            var rects = svg.selectAll("rect")
+                .data(data);
+
+            // Append a new svg:rect if there are more data
+            // points than there are existing svg:rect in #container
+            rects
+                .enter()
+                .append("rect");
+
+            // Set the attributes (x, y, width, height) for our
+            // svg rectangles just like we would for any other DOM
+            // element.  Note that the coordinate [0, 0] is in the
+            // TOP LEFT of corner of the container in svg.
+            rects
+                .attr("fill", "#222")
+                .attr("height", function(d, i) {
+                    return yscale(d) + "px";
+                })
+                .attr("width", (barWidth - pad) + "px")
+                .attr("y", function(d, i) {
+                    return (height - yscale(d)) + "px";
+                })
+                .attr("x", function(d, i) {
+                    return (barWidth * i + pad/2) + "px";
+                });
+
+        </script>
+    </body>
+</html>

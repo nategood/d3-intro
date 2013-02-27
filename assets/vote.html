@@ -1,0 +1,68 @@
+<html>
+    <head>
+        <title>Vote!</title>
+        <script type="text/javascript" src="jquery.js"></script>
+        <script type="text/javascript" src="socket.io.js"></script>
+        <style type="text/css">
+            html, body {
+                background: #111;
+                color: #fff;
+                margin: 0;
+                padding: 25px;
+                font-family: Helvetica;
+                text-align: center;
+            }
+            h1 {
+                font-weight: normal;
+                font-size: 23px;
+                text-align: center;
+            }
+            a {
+                color: #ccc;
+                text-decoration: none;
+                display: block;
+                padding: 5px;
+                background: #333;
+                width: 200px;
+                margin: 10px auto;
+            }
+            a:active {
+                color: #fff;
+                background: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Vote</h1>
+        <div id="memo">Choose from an option below</div>
+        <a class="vote" href="#1">One</a>
+        <a class="vote" href="#2">Two</a>
+        <a class="vote" href="#3">Three</a>
+        <a class="vote" href="#4">Four</a>
+        <a class="vote" href="#5">Five</a>
+
+        <script type="text/javascript">
+
+            // Connect to Socket
+            var socket;
+
+            socket = io.connect('http://localhost:9999');
+
+            $("a.vote").click(function() {
+                var vote = parseInt(this.href.split("#")[1]);
+                socket.emit('vote', vote);
+                $("#memo").html("Sent vote for " + vote);
+                return false;
+            });
+
+            // socket.on('events', function (data) {
+            //     var vote = parseInt(data);
+            //     if (isNaN(vote) || vote >= votes.length)
+            //         return;
+            //     votes[vote]++;
+            //     chart1(votes);
+            // });
+
+        </script>
+    </body>
+</html>
