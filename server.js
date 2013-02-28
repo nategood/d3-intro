@@ -1,14 +1,16 @@
 var express = require('express');
-var io = require('socket-io');
-
 var app = express();
-app.use(express.static('assets'));
-app.listen(9999);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
 
-// // Voting
-io.listen(app);
+server.listen(80);
+
+// Servers up our static html files (more of the examples)
+app.use(express.static('assets'));
+
+// Voting
 io.sockets.on("connection", function(socket) {
   socket.on("vote", function(data) {
-    socket.emit("result", data);
+    io.sockets.emit("result", data);
   });
 });

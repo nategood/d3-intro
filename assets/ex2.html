@@ -1,7 +1,7 @@
 <html style="margin: 0; padding: 0;">
     <head>
         <title>D3 Example 1: Selection and Manipulating DOM</title>
-        <script type="text/javascript" src="d3.js"></script>
+        <script type="text/javascript" src="/js/d3.js"></script>
         <style type="text/css">
             a.bucket {
                 display: block;
@@ -25,8 +25,9 @@
             var buckets =
                 d3.select("#container")
                 .selectAll("a")
-                .data([12, 23, 16, 32, 64]);
+                .data([12, 23, 16, 24, 64]);
 
+            // Uncomment to see how D3 stages work
             // buckets.enter().append("a").attr("class", "bucket");
             // buckets.exit().remove();
 
@@ -38,9 +39,9 @@
                     return "Link " + d;
                 });
 
-            // interesting note.  if you are going to append,
-            // you must have also selected the parent element
-            // at some point (e.g. #container in this case)
+            // Interesting note.  If you are going to append,
+            // with the .enter() stage you must have also selected
+            // the parent element at some point (e.g. #container)
         </script>
     </body>
 </html>

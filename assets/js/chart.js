@@ -52,7 +52,7 @@ var chart = function(conf) {
         bars
             .transition().duration(500)
             .attr("fill", function(d, i) {
-                return d3.hsl(cscale(i), 0.50, 0.50);
+                return d3.hsl(cscale(i), 0.70, 0.50);
             })
             .attr("height", function(d, i) {
                 return yscale(d) + "px";
