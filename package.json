@@ -1,14 +1,15 @@
 {
-  "author": "",
-  "name": "d3-server",
+  "author": "Nate Good <me@nategood.com>",
+  "name": "d3-intro",
   "version": "0.0.0",
   "repository": {
-    "url": ""
+    "url": "https://github.com/nategood/d3-intro"
   },
-  "dependencies": {},
-  "devDependencies": {},
-  "optionalDependencies": {},
+  "dependencies": {
+    "socket.io": "0.9.x",
+    "express": "3.1.x"
+  },
   "engines": {
-    "node": "*"
+    "node": "0.8.x"
   }
 }
