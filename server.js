@@ -3,7 +3,7 @@ var app = express();
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 
-server.listen(80);
+server.listen(9001);
 
 // Servers up our static html files (more of the examples)
 app.use(express.static('assets'));

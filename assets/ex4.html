@@ -29,7 +29,10 @@
                 return d3.range(n).map(Math.random);
             };
 
-            // Instantiate the chart with config
+            // Instantiate the chart with config.  This chart
+            // function is one we created and is in chart.js.
+            // It loosely follows the recommendation of bostock laid
+            // out at http://bost.ocks.org/mike/chart
             var chart1 = chart({
                 height: 400,
                 width: 400,
